@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Navbar, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { savePointsF } from '../../utils/savePoints';
 import Opcion from './Opcion';
 import Result from './Result';
@@ -9,6 +10,7 @@ const Piedra = () => {
     const [name, setName] = useState("Player");
     const [electC, setElectC] = useState({});
     const [pPoints, setPPoints] = useState(0);
+    const [winning, setWinning] = useState("");
     useEffect(() => {
         document.title = "Piedra papel o tijera";
         validatePlayer();
@@ -16,43 +18,66 @@ const Piedra = () => {
     const opc = [
         {
             elect: "piedra",
-            defeat: "tijera"
+            defeat: "papel"
         },
         {
             elect: "papel",
-            defeat: "piedra"
+            defeat: "tijera"
         },
         {
             elect: "tijera",
-            defeat: "papel"
+            defeat: "piedra"
         }
     ];
     const validatePlayer = () => {
-        if (localStorage.getItem("name") !== null && localStorage.getItem("name") !== "") {
-            setName(localStorage.getItem("name"));
+        if (localStorage.getItem("actualPlayer") !== null && localStorage.getItem("actualPlayer") !== "") {
+            setName(localStorage.getItem("actualPlayer"));
         } else {
             let name = prompt("Ingrese su nombre");
             localStorage.setItem("name", name);
+            localStorage.setItem("actualPlayer", name);
             setName(name);
         }
     }
     const selectOpc = ev => {
         let player = opc.find(e => e.elect === ev.target.textContent);
         setElectP(player);
-        selectC();
-    }
-    const selectC = () => {
         let elect = opc[Math.floor(Math.random() * opc.length)];
         setElectC(elect);
+        validateWin(player, elect);
+    }
+    const validateWin = (player, elect) => {
+        if (player.defeat === elect.elect) {
+            //setPPoints(prev => prev + 10);
+            //savePoints(10);
+            setWinning("Gana la maquina");
+        } else if (elect.defeat === player.elect) {
+            setPPoints(prev => prev + 10);
+            savePoints(pPoints);
+            setWinning("Gana el jugador");
+        } else if (elect.elect === player.elect) {
+            setPPoints(prev => prev + 5);
+            savePoints(pPoints);
+            setWinning(
+                "Empate"
+            )
+        }
     }
     const savePoints = (point) => {
         //setPPoints(prev => prev + point);
-        savePointsF(name, point);
+        savePointsF(name, point, "Piedra papel o tijera");
     }
     return (
         <Container fluid>
+            <Navbar bg="dark" variant="dark">
+                <Container fluid>
+                    <Navbar.Brand as={Link} to="/">
+                        Arcade Colombia
+                    </Navbar.Brand>
+                </Container>
+            </Navbar>
             <div>
-                <Result savePoints={savePoints} player={electP} machine={electC} />
+                <Result winning={winning} />
                 <Row className="justify-content-around">
                     <Col sm="auto">
                         <div className="jugador">{name}</div>

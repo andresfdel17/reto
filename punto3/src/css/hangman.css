@@ -1,0 +1,29 @@
+html, body{
+  height: 100vh !important;
+}
+div.App {
+  text-align: center;
+  background-color: #282c34;
+  align-items: center;
+  height: 100vh !important;
+}
+
+div.App {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+div.hang {
+  text-align: center;
+  margin: 20px auto;
+}
+
+ul.hang {
+  padding: 0;
+  text-align: center;
+  margin: 20px auto;
+}

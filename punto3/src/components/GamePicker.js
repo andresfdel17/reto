@@ -17,7 +17,7 @@ const GamePicker = () => {
   }, []);
   const games = [
     {
-      route: "/ahorcated",
+      route: "/hangman",
       name: "Ahorcado",
       img: Alogo,
       desc: "Diviertete con tus amigos adivinando la palabra"
@@ -89,9 +89,22 @@ const GamePicker = () => {
             <tr>
               <th>No</th>
               <th>Nombre</th>
+              <th>Juego</th>
               <th>Puntos</th>
             </tr>
           </thead>
+          <tbody>
+            {
+              points.sort((a, b) => b.points - a.points).slice(0, 9).map((value, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{value.name}</td>
+                  <td>{value.game}</td>
+                  <td>{value.points}</td>
+                </tr>
+              ))
+            }
+          </tbody>
         </table>
       </div>
     </Container>

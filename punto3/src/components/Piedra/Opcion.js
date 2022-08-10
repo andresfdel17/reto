@@ -1,10 +1,10 @@
 import React from 'react'
 
 const Opcion = (props) => {
-    const { electO } = props;
+    const { electO, elect } = props;
     return (
         <div className="opcion" onClick={electO}>
-            {props.elect}
+            {elect}
         </div>
     )
 }
