@@ -2,7 +2,7 @@
 
 ## Explicación en video
 
-[video](https://youtu.be/50yjEqWvrI0)
+[![video](https://img.youtube.com/vi/50yjEqWvrI0/0.jpg)](https://www.youtube.com/watch?v=50yjEqWvrI0)
 
 # Getting Started with Create React App
 
